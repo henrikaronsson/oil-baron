@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/OilBaron.Api/OilBaron.Api.csproj" />
+    <Project Path="src/OilBaron.Game/OilBaron.Game.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/OilBaron.Game.Tests/OilBaron.Game.Tests.csproj" />
+  </Folder>
+</Solution>

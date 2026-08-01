@@ -1,0 +1,136 @@
+<div class="container py-4">
+  <header class="mb-4">
+    <h1 class="display-6 mb-1">Oil Baron</h1>
+    <p class="text-secondary mb-0">Run a small oil company. Buy land, drill, produce, sell.</p>
+  </header>
+
+  @if (error()) {
+    <div class="alert alert-danger" role="alert">{{ error() }}</div>
+  }
+
+  @if (!game()) {
+    <section class="start-panel col-lg-6">
+      <h2 class="h4 mb-3">Start a new game</h2>
+      <div class="mb-3">
+        <label class="form-label" for="companyName">Company name</label>
+        <input
+          id="companyName"
+          class="form-control"
+          [(ngModel)]="companyName"
+          [disabled]="busy()"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="seed">Seed (optional)</label>
+        <input
+          id="seed"
+          class="form-control"
+          [(ngModel)]="seedInput"
+          placeholder="Leave blank for random"
+          [disabled]="busy()"
+        />
+      </div>
+      <button class="btn btn-primary" type="button" (click)="startGame()" [disabled]="busy()">
+        Start game
+      </button>
+    </section>
+  } @else {
+    @let state = game()!;
+
+    <section class="hud mb-4">
+      <div class="row g-3">
+        <div class="col-md-3">
+          <div class="hud-item">
+            <div class="label">Company</div>
+            <div class="value">{{ state.companyName }}</div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="hud-item">
+            <div class="label">Day</div>
+            <div class="value">{{ state.day }}</div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="hud-item">
+            <div class="label">Cash</div>
+            <div class="value">{{ state.cash | currency: 'USD' : 'symbol' : '1.0-0' }}</div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="hud-item">
+            <div class="label">Barrels</div>
+            <div class="value">{{ state.oilBarrels }}</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="hud-item">
+            <div class="label">Oil price</div>
+            <div class="value">{{ state.oilPrice | currency: 'USD' : 'symbol' : '1.0-0' }}/bbl</div>
+          </div>
+        </div>
+      </div>
+      <p class="text-secondary small mt-2 mb-0">Seed {{ state.seed }}</p>
+    </section>
+
+    <section class="actions mb-4 d-flex flex-wrap gap-2">
+      <button class="btn btn-success" type="button" (click)="advanceDay()" [disabled]="busy()">
+        Advance day
+      </button>
+      <button
+        class="btn btn-warning"
+        type="button"
+        (click)="sellOil()"
+        [disabled]="busy() || state.oilBarrels <= 0"
+      >
+        Sell oil
+      </button>
+      <button class="btn btn-outline-secondary" type="button" (click)="newGame()" [disabled]="busy()">
+        New game
+      </button>
+    </section>
+
+    <section>
+      <h2 class="h5 mb-3">Land grid</h2>
+      <div class="plot-grid">
+        @for (row of rows(); track $index) {
+          <div class="plot-row">
+            @for (plot of row; track plot.x + ',' + plot.y) {
+              <div
+                class="plot"
+                [class.owned]="plot.owned"
+                [class.producing]="plot.producing"
+                [class.drilled]="plot.drilled"
+              >
+                <div class="plot-coord">{{ plot.x }},{{ plot.y }}</div>
+                <div class="plot-status">{{ plotStatus(plot) }}</div>
+                <div class="plot-actions mt-2 d-flex flex-column gap-1">
+                  @if (!plot.owned) {
+                    <button
+                      class="btn btn-sm btn-primary"
+                      type="button"
+                      (click)="buy(plot)"
+                      [disabled]="busy()"
+                    >
+                      Buy
+                    </button>
+                  }
+                  @if (plot.owned && !plot.drilled) {
+                    <button
+                      class="btn btn-sm btn-secondary"
+                      type="button"
+                      (click)="drill(plot)"
+                      [disabled]="busy()"
+                    >
+                      Drill
+                    </button>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </section>
+  }
+</div>
