@@ -7,6 +7,14 @@
   background-size: 3px 3px, auto;
 }
 
+.ob-canvas-weave {
+  background-image:
+    repeating-linear-gradient(0deg, rgb(42 36 28 / 0.055) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgb(42 36 28 / 0.045) 0 1px, transparent 1px 4px),
+    linear-gradient(135deg, rgb(255 255 255 / 0.2), transparent 45%);
+  background-size: 4px 4px, 4px 4px, auto;
+}
+
 .ob-tech-grid {
   background-image:
     linear-gradient(rgb(138 124 104 / 0.12) 1px, transparent 1px),
