@@ -2,14 +2,14 @@
 
 Oil Baron’s Angular client uses **Tailwind CSS v4** as the primary styling system, with a light early-1970s corporate design language.
 
-## Why Tailwind instead of Bootstrap
+## Why Tailwind
 
-Bootstrap fitted the MVP, but the UI now needs:
+The UI needs:
 
 - A period-specific light theme (warm paper, petrol blue, restrained geometry)
 - Semantic design tokens for game concepts (cash, oil, production, market)
 - Reusable Angular components with typed variants
-- Utility-first layout without Bootstrap’s opinionated component CSS
+- Utility-first styling as the default: layout and appearance come from composing small single-purpose classes — directly in markup for one-off layout, or gathered into typed component class strings for repeated UI — with bespoke component CSS reserved for game surfaces like the plot board
 
 Tailwind keeps presentation in templates while tokens stay in one theme layer. Game rules remain server-side; the client only styles state the API returns.
 
@@ -224,26 +224,6 @@ const marketTrendClasses = {
 ```
 
 Use CSS custom properties for truly dynamic values (gauge rotation, progress width, company colours).
-
-## Bootstrap removal
-
-Removed:
-
-- npm package `bootstrap` (^5.3.8)
-- `@use 'bootstrap/scss/bootstrap'` from global styles
-- Bootstrap utility / component classes from `game-page.html`
-
-There was **no** Bootstrap JavaScript, Popper, or Bootstrap Icons dependency.
-
-### Verify no Bootstrap remains
-
-From the repo root:
-
-```powershell
-rg -i "bootstrap|btn-|form-control|data-bs-|alert-danger|navbar-|card-body" src/oil-baron-web --glob '!package-lock.json'
-```
-
-Expect only Angular’s `bootstrapApplication` in `main.ts`.
 
 ## Practical examples from this codebase
 
