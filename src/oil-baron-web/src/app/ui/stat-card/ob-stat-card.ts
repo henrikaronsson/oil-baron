@@ -15,51 +15,30 @@ const TONE_CLASSES: Record<ObStatTone, string> = {
   standalone: true,
   template: `
     <div
-      class="border border-[var(--ob-border)] bg-[var(--ob-surface-raised)] px-4 py-3 rounded-[var(--ob-radius-sm)] ob-raised-panel"
+      class="border border-[var(--ob-border)] bg-[var(--ob-surface-document)] px-5 py-4 rounded-[var(--ob-radius-sm)] ob-raised-panel"
     >
-      <div class="flex items-center gap-2">
-        @if (showLamp) {
-          <span
-            class="inline-block h-2.5 w-2.5 rounded-full border border-[var(--ob-border-strong)]"
-            [class]="lampClass"
-            aria-hidden="true"
-          ></span>
-        }
+      <div class="flex items-center gap-4">
         @if (icon) {
-          <img [src]="icon" alt="" class="h-5 w-5" aria-hidden="true" />
+          <img [src]="icon" alt="" class="shrink-0" [class]="iconClass" aria-hidden="true" />
         }
-        <p class="ob-label">{{ label }}</p>
+        <div class="flex flex-col items-start pl-1">
+          <p class="ob-label">{{ label }}</p>
+          <p
+            class="mt-1 font-mono text-xl font-semibold tabular-nums tracking-tight"
+            [class]="TONE_CLASSES[tone]"
+          >
+            <ng-content />
+          </p>
+        </div>
       </div>
-      <p
-        class="mt-1 font-mono text-lg font-semibold tabular-nums tracking-tight"
-        [class]="TONE_CLASSES[tone]"
-      >
-        <ng-content />
-      </p>
     </div>
   `,
 })
 export class ObStatCard {
   @Input({ required: true }) label!: string;
   @Input() tone: ObStatTone = 'default';
-  @Input() showLamp = false;
   @Input() icon = '';
-
+  @Input() iconClass = 'h-12 w-12';
 
   protected readonly TONE_CLASSES = TONE_CLASSES;
-
-  get lampClass(): string {
-    switch (this.tone) {
-      case 'cash':
-        return 'bg-[var(--ob-indicator-cash)]';
-      case 'oil':
-        return 'bg-[var(--ob-indicator-oil)]';
-      case 'production':
-        return 'bg-[var(--ob-indicator-production)]';
-      case 'market':
-        return 'bg-[var(--ob-indicator-market)]';
-      default:
-        return 'bg-[var(--ob-surface-control)]';
-    }
-  }
 }

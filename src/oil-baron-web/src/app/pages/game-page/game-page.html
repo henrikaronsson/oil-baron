@@ -1,8 +1,10 @@
 <div class="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
   <header class="mb-6 border-b border-[var(--ob-divider-strong)] pb-4">
-    <p class="ob-label">International petroleum operations</p>
+    <p class="ob-label mb-1">International petroleum operations</p>
     <h1 class="flex items-center gap-3 font-display text-4xl tracking-[0.08em] text-[var(--ob-text-primary)] sm:text-5xl">
-      <img src="icons/petrol-industry/svg/026-tower.svg" alt="" class="h-10 w-10 sm:h-12 sm:w-12" aria-hidden="true" />
+      <span class="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-[var(--ob-border-strong)] bg-[var(--ob-surface-document)] sm:h-16 sm:w-16">
+        <img src="icons/petrol-industry/svg/026-tower.svg" alt="" class="h-10 w-10 sm:h-12 sm:w-12" aria-hidden="true" />
+      </span>
       Oil Baron
     </h1>
     <p class="mt-2 max-w-2xl text-[var(--ob-text-secondary)]">
@@ -72,21 +74,21 @@
       </div>
 
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
-        <ob-stat-card label="Day" [showLamp]="true">
+        <ob-stat-card label="Day" icon="icons/calendar.svg">
           {{ state.day }}
         </ob-stat-card>
-        <ob-stat-card label="Cash" tone="cash" [showLamp]="true" icon="icons/petrol-industry/svg/023-stocks.svg">
+        <ob-stat-card label="Cash" tone="cash" icon="icons/petrol-industry/svg/023-stocks.svg">
           <ob-money-value [amount]="state.cash" label="Cash" />
         </ob-stat-card>
-        <ob-stat-card label="Barrels in stock" tone="oil" [showLamp]="true" icon="icons/petrol-industry/svg/001-barrels.svg">
+        <ob-stat-card label="Barrels" tone="oil" icon="icons/petrol-industry/svg/001-barrels.svg">
           {{ state.oilBarrels | number: '1.0-0' }}
         </ob-stat-card>
-        <ob-stat-card label="Oil price" tone="market" [showLamp]="true" icon="icons/petrol-industry/svg/013-increase.svg">
+        <ob-stat-card label="Price" tone="market" icon="icons/petrol-industry/svg/013-increase.svg">
           <ob-money-value [amount]="state.oilPrice" label="Oil price" />
           <span class="text-sm font-normal text-[var(--ob-text-muted)]"> /bbl</span>
         </ob-stat-card>
-        <ob-stat-card label="Operations" tone="production" [showLamp]="true" icon="icons/petrol-industry/svg/021-pump.svg">
-          {{ producingCount() }} producing
+        <ob-stat-card label="Wells" tone="production" icon="icons/petrol-industry/svg/021-pump.svg">
+          {{ producingCount() }}
         </ob-stat-card>
       </div>
     </section>
@@ -101,11 +103,9 @@
           (click)="sellOil()"
           [disabled]="busy() || state.oilBarrels <= 0"
         >
-          <img src="icons/petrol-industry/svg/009-exchange.svg" alt="" class="h-4 w-4" aria-hidden="true" />
           Sell oil
         </ob-button>
         <ob-button variant="secondary" (click)="newGame()" [disabled]="busy()">
-          <img src="icons/petrol-industry/svg/007-document.svg" alt="" class="h-4 w-4" aria-hidden="true" />
           New game
         </ob-button>
       </ob-toolbar>
@@ -140,7 +140,6 @@
                       (click)="buy(plot)"
                       [disabled]="busy()"
                     >
-                      <img src="icons/petrol-industry/svg/005-deal.svg" alt="" class="h-4 w-4" aria-hidden="true" />
                       Buy lease
                     </ob-button>
                   }
@@ -151,7 +150,6 @@
                       (click)="drill(plot)"
                       [disabled]="busy()"
                     >
-                      <img src="icons/petrol-industry/svg/008-drill.svg" alt="" class="h-4 w-4" aria-hidden="true" />
                       Drill
                     </ob-button>
                   }

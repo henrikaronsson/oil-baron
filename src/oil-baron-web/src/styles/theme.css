@@ -13,7 +13,7 @@
   --ob-surface-terminal: #1e2430;
 
   /* Text */
-  --ob-text-primary: #2a241c;
+  --ob-text-primary: #4c241d;
   --ob-text-secondary: #5a5044;
   --ob-text-muted: #7a6f60;
   --ob-text-inverse: #f3eee4;
@@ -81,7 +81,7 @@
   --ob-indicator-cash: #3f5f3c;
   --ob-indicator-debt: #8b3a35;
   --ob-indicator-production: #2f5f6b;
-  --ob-indicator-market: #5a4a2a;
+  --ob-indicator-market: #6b4f5b;
   --ob-indicator-reputation: #4a3f6b;
   --ob-indicator-rival: #6b3a2a;
 
@@ -89,7 +89,7 @@
   --ob-money-negative: #7a322e;
 
   /* Interaction */
-  --ob-selected: #e8d9a8;
+  --ob-selected: #e4eac7;
   --ob-selected-border: #b89a4a;
   --ob-disabled: #b7ab97;
   --ob-focus: #2f5f6b;
