@@ -2,6 +2,7 @@ import { DecimalPipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { GameStateDto, PlotDto } from '../../models/game-state';
 import { GameApiService } from '../../services/game-api.service';
@@ -23,6 +24,7 @@ import {
   imports: [
     FormsModule,
     DecimalPipe,
+    RouterLink,
     ObAlert,
     ObBadge,
     ObButton,

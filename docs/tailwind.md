@@ -73,6 +73,7 @@ Examples:
 | `--ob-surface-document` | Contracts / start-game forms |
 | `--ob-surface-terminal` | Contextual dark readouts |
 | `--ob-action-primary` | Petrol-blue primary actions |
+| `--ob-link` / `--ob-link-hover` | Text links and hover state |
 | `--ob-action-financial` | Olive financial confirmation |
 | `--ob-indicator-cash` / `--ob-indicator-oil` | Resource meaning |
 | `--ob-focus` | Keyboard focus ring |

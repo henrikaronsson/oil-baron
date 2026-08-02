@@ -1,0 +1,166 @@
+<main class="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+  <header class="mb-8 flex flex-wrap items-end justify-between gap-4 border-b border-[var(--ob-divider-strong)] pb-4">
+    <div>
+      <p class="ob-label mb-1">Design system workbench</p>
+      <h1 class="font-display text-4xl tracking-[0.08em] text-[var(--ob-text-primary)] sm:text-5xl">
+        Component showcase
+      </h1>
+    </div>
+    <a routerLink="/" class="font-semibold text-[var(--ob-link)] underline underline-offset-4 hover:text-[var(--ob-link-hover)]">
+      Back to game
+    </a>
+  </header>
+
+  <div class="space-y-8">
+    <section aria-label="Oil Baron brand lockups">
+      <div class="grid items-start gap-4 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+        <div class="flex min-h-40 items-center gap-8 border border-[var(--ob-border)] bg-[var(--ob-surface-document)] px-8 py-6 shadow-[var(--ob-shadow-panel)] rounded-[var(--ob-radius-sm)] sm:px-10">
+          <img
+            src="icons/petrol-industry/svg/026-tower.svg"
+            alt=""
+            class="h-24 w-24 shrink-0 sm:h-28 sm:w-28"
+            aria-hidden="true"
+          />
+          <div class="min-w-0">
+            <p class="font-display text-5xl leading-none tracking-[0.08em] text-[var(--ob-text-primary)]">
+              Oil Baron
+            </p>
+            <p class="ob-label mt-3 leading-relaxed">International petroleum operations</p>
+          </div>
+        </div>
+
+        <div class="flex aspect-square w-full items-center gap-6 border border-[var(--ob-border)] bg-[var(--ob-surface-document)] px-8 py-8 shadow-[var(--ob-shadow-panel)] rounded-[var(--ob-radius-sm)]">
+          <img
+            src="icons/petrol-industry/svg/026-tower.svg"
+            alt=""
+            class="h-24 w-24 shrink-0"
+            aria-hidden="true"
+          />
+          <div class="min-w-0">
+            <p class="font-display text-4xl leading-none tracking-[0.08em] text-[var(--ob-text-primary)]">
+              Oil Baron
+            </p>
+            <p class="ob-label mt-3 leading-relaxed">International petroleum operations</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="showcase-actions">
+      <h2 id="showcase-actions" class="ob-section-title mb-3">Actions</h2>
+      <ob-toolbar label="Variants" ariaLabel="Button variants">
+        <ob-button variant="primary">Primary</ob-button>
+        <ob-button variant="secondary">Secondary</ob-button>
+        <ob-button variant="financial">Financial</ob-button>
+        <ob-button variant="warning">Warning</ob-button>
+        <ob-button variant="danger">Danger</ob-button>
+        <ob-button variant="quiet">Quiet</ob-button>
+        <ob-button variant="terminal">Terminal</ob-button>
+        <ob-button variant="primary" [disabled]="true">Disabled</ob-button>
+      </ob-toolbar>
+    </section>
+
+    <section aria-labelledby="showcase-status">
+      <h2 id="showcase-status" class="ob-section-title mb-3">Status</h2>
+      <div class="grid gap-4 lg:grid-cols-2">
+        <div class="space-y-3">
+          <ob-alert variant="info">Market report received from the exchange.</ob-alert>
+          <ob-alert variant="success">Lease purchase confirmed.</ob-alert>
+          <ob-alert variant="warning">Storage capacity is nearly exhausted.</ob-alert>
+          <ob-alert variant="danger">Drilling authorization was declined.</ob-alert>
+        </div>
+        <ob-panel variant="control" eyebrow="Signal board" title="Operational states">
+          <div class="space-y-5">
+            <div class="flex flex-wrap gap-2">
+              <ob-badge variant="neutral">Unowned</ob-badge>
+              <ob-badge variant="success">Producing</ob-badge>
+              <ob-badge variant="warning">Survey</ob-badge>
+              <ob-badge variant="danger">Dry</ob-badge>
+              <ob-badge variant="info">Owned</ob-badge>
+              <ob-badge variant="oil">Oil</ob-badge>
+            </div>
+            <div class="flex flex-wrap gap-x-5 gap-y-3">
+              <ob-status-lamp tone="idle" label="Idle" />
+              <ob-status-lamp tone="ok" label="Online" />
+              <ob-status-lamp tone="warn" label="Attention" />
+              <ob-status-lamp tone="alarm" label="Alarm" />
+              <ob-status-lamp tone="oil" label="Flowing" />
+            </div>
+          </div>
+        </ob-panel>
+      </div>
+    </section>
+
+    <section aria-labelledby="showcase-resources">
+      <h2 id="showcase-resources" class="ob-section-title mb-3">Resources</h2>
+      <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        <ob-stat-card label="Day" icon="icons/calendar.svg">24</ob-stat-card>
+        <ob-stat-card label="Cash" tone="cash" icon="icons/petrol-industry/svg/023-stocks.svg">
+          <ob-money-value [amount]="128400" label="Cash" />
+        </ob-stat-card>
+        <ob-stat-card label="Barrels" tone="oil" icon="icons/petrol-industry/svg/001-barrels.svg">
+          4,820
+        </ob-stat-card>
+        <ob-stat-card label="Price" tone="market" icon="icons/petrol-industry/svg/013-increase.svg">
+          <ob-money-value [amount]="67" label="Oil price" />
+          <span class="text-sm font-normal text-[var(--ob-text-muted)]"> /bbl</span>
+        </ob-stat-card>
+        <ob-stat-card label="Wells" tone="production" icon="icons/petrol-industry/svg/021-pump.svg">
+          6
+        </ob-stat-card>
+      </div>
+    </section>
+
+    <section aria-labelledby="showcase-panels">
+      <h2 id="showcase-panels" class="ob-section-title mb-3">Panels and forms</h2>
+      <div class="grid gap-4 md:grid-cols-2">
+        <ob-panel variant="document" eyebrow="Lease office" title="Document panel">
+          <div class="space-y-4">
+            <ob-form-field label="Company name" controlId="showcase-company" hint="Example input with supporting text.">
+              <input id="showcase-company" [class]="inputClasses" value="Continental Petroleum" />
+            </ob-form-field>
+            <ob-button variant="financial">Approve filing</ob-button>
+          </div>
+        </ob-panel>
+
+        <ob-panel variant="corporate" eyebrow="Board report" title="Corporate panel">
+          <p class="text-[var(--ob-text-secondary)]">
+            A neutral paper surface for planning, summaries, and repeated operational content.
+          </p>
+        </ob-panel>
+
+        <ob-panel variant="control" eyebrow="Field controls" title="Control panel">
+          <div class="grid grid-cols-2 gap-3 font-mono text-sm tabular-nums">
+            <span>Pressure</span><strong class="text-right">2,180 PSI</strong>
+            <span>Flow</span><strong class="text-right">86 BBL/D</strong>
+            <span>Temperature</span><strong class="text-right">74 C</strong>
+          </div>
+        </ob-panel>
+
+        <ob-panel variant="terminal" eyebrow="Market wire" title="Terminal panel">
+          <div class="space-y-2 font-mono text-sm tabular-nums">
+            <p>WTI 67.00 +1.25</p>
+            <p>STORAGE 4,820 BBL</p>
+            <p>STATUS: CONNECTED</p>
+          </div>
+        </ob-panel>
+      </div>
+    </section>
+
+    <section aria-labelledby="showcase-layouts">
+      <h2 id="showcase-layouts" class="ob-section-title mb-3">Layout checks</h2>
+      <div class="grid gap-4 lg:grid-cols-[2fr_1fr]">
+        <ob-panel variant="corporate" eyebrow="Primary workspace" title="Wide content region">
+          <div class="grid gap-3 sm:grid-cols-3">
+            <div class="min-h-24 border border-[var(--ob-border)] bg-[var(--ob-surface-raised)] p-3">Column A</div>
+            <div class="min-h-24 border border-[var(--ob-border)] bg-[var(--ob-surface-raised)] p-3">Column B</div>
+            <div class="min-h-24 border border-[var(--ob-border)] bg-[var(--ob-surface-raised)] p-3">Column C</div>
+          </div>
+        </ob-panel>
+        <ob-panel variant="document" eyebrow="Side rail" title="Narrow region">
+          <p class="text-[var(--ob-text-secondary)]">Use this area to check wrapping and responsive proportions.</p>
+        </ob-panel>
+      </div>
+    </section>
+  </div>
+</main>

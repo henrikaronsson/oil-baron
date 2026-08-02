@@ -2,7 +2,7 @@
   <header class="mb-6 border-b border-[var(--ob-divider-strong)] pb-4">
     <p class="ob-label mb-1">International petroleum operations</p>
     <h1 class="flex items-center gap-3 font-display text-4xl tracking-[0.08em] text-[var(--ob-text-primary)] sm:text-5xl">
-      <span class="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-[var(--ob-border-strong)] bg-[var(--ob-surface-document)] sm:h-16 sm:w-16">
+      <span class="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-[var(--ob-border)] bg-[var(--ob-surface-document)] shadow-[var(--ob-shadow-panel)] sm:h-16 sm:w-16">
         <img src="icons/petrol-industry/svg/026-tower.svg" alt="" class="h-10 w-10 sm:h-12 sm:w-12" aria-hidden="true" />
       </span>
       Oil Baron
@@ -58,6 +58,11 @@
           </div>
         </div>
       </ob-panel>
+      <p class="mt-4 text-sm text-[var(--ob-text-muted)]">
+        <a routerLink="/showcase" class="font-semibold text-[var(--ob-link)] underline underline-offset-4 hover:text-[var(--ob-link-hover)]">
+          Component showcase
+        </a>
+      </p>
     </div>
   } @else {
     @let state = game()!;

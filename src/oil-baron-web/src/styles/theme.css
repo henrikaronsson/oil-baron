@@ -18,6 +18,8 @@
   --ob-text-muted: #7a6f60;
   --ob-text-inverse: #f3eee4;
   --ob-text-terminal: #e8d9a8;
+  --ob-link: #2f5f6b;
+  --ob-link-hover: #244a53;
 
   /* Borders & dividers */
   --ob-border: #b7ab97;
