@@ -6,7 +6,7 @@ Open-source, browser-based oil company management simulation. Inspired by classi
 
 - **Backend:** .NET 10 Web API, Newtonsoft.Json
 - **Game rules:** `OilBaron.Game` (pure C# library; deterministic, seeded)
-- **Frontend:** Angular 20, standalone components, Bootstrap 5, SCSS
+- **Frontend:** Angular 20, standalone components, Tailwind CSS 4, SCSS (components) + global CSS theme
 - **Persistence (MVP):** in-memory only (games are lost when the API restarts)
 
 ## Repository layout
@@ -61,7 +61,7 @@ dotnet test OilBaron.slnx
 | [docs/economy.md](docs/economy.md) | Economy constants |
 | [docs/architecture.md](docs/architecture.md) | Technical architecture |
 | [docs/api.md](docs/api.md) | HTTP API |
-| [docs/roadmap.md](docs/roadmap.md) | Roadmap |
+| [docs/tailwind.md](docs/tailwind.md) | Tailwind + 1970s design system |
 | [AGENTS.md](AGENTS.md) | Conventions for coding agents |
 
 ## License

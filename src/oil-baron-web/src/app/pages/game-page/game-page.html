@@ -1,136 +1,161 @@
-<div class="container py-4">
-  <header class="mb-4">
-    <h1 class="display-6 mb-1">Oil Baron</h1>
-    <p class="text-secondary mb-0">Run a small oil company. Buy land, drill, produce, sell.</p>
+<div class="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+  <header class="mb-6 border-b border-[var(--ob-divider-strong)] pb-4">
+    <p class="ob-label">International petroleum operations</p>
+    <h1 class="font-display text-4xl tracking-[0.08em] text-[var(--ob-text-primary)] sm:text-5xl">
+      Oil Baron
+    </h1>
+    <p class="mt-2 max-w-2xl text-[var(--ob-text-secondary)]">
+      Manage a small oil company from the boardroom: buy land, drill, produce, and sell — circa 1971.
+    </p>
   </header>
 
   @if (error()) {
-    <div class="alert alert-danger" role="alert">{{ error() }}</div>
+    <div class="mb-4">
+      <ob-alert variant="danger">{{ error() }}</ob-alert>
+    </div>
   }
 
   @if (!game()) {
-    <section class="start-panel col-lg-6">
-      <h2 class="h4 mb-3">Start a new game</h2>
-      <div class="mb-3">
-        <label class="form-label" for="companyName">Company name</label>
-        <input
-          id="companyName"
-          class="form-control"
-          [(ngModel)]="companyName"
-          [disabled]="busy()"
-        />
-      </div>
-      <div class="mb-3">
-        <label class="form-label" for="seed">Seed (optional)</label>
-        <input
-          id="seed"
-          class="form-control"
-          [(ngModel)]="seedInput"
-          placeholder="Leave blank for random"
-          [disabled]="busy()"
-        />
-      </div>
-      <button class="btn btn-primary" type="button" (click)="startGame()" [disabled]="busy()">
-        Start game
-      </button>
-    </section>
+    <div class="max-w-xl">
+      <ob-panel
+        variant="document"
+        eyebrow="New venture"
+        title="Start a new game"
+      >
+        <div class="space-y-4">
+          <ob-form-field label="Company name" controlId="companyName">
+            <input
+              id="companyName"
+              [class]="inputClasses"
+              [(ngModel)]="companyName"
+              [disabled]="busy()"
+              autocomplete="organization"
+            />
+          </ob-form-field>
+
+          <ob-form-field
+            label="Seed (optional)"
+            controlId="seed"
+            hint="Leave blank for a random market seed."
+          >
+            <input
+              id="seed"
+              [class]="inputClasses"
+              [(ngModel)]="seedInput"
+              placeholder="Whole number"
+              [disabled]="busy()"
+              inputmode="numeric"
+            />
+          </ob-form-field>
+
+          <div class="flex justify-end border-t border-[var(--ob-divider)] pt-4">
+            <ob-button variant="financial" (click)="startGame()" [disabled]="busy()">
+              Open the books
+            </ob-button>
+          </div>
+        </div>
+      </ob-panel>
+    </div>
   } @else {
     @let state = game()!;
 
-    <section class="hud mb-4">
-      <div class="row g-3">
-        <div class="col-md-3">
-          <div class="hud-item">
-            <div class="label">Company</div>
-            <div class="value">{{ state.companyName }}</div>
-          </div>
+    <section class="mb-6" aria-label="Company resource bar">
+      <div class="mb-3 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <p class="ob-label">Operating company</p>
+          <h2 class="font-display text-2xl tracking-[0.06em]">{{ state.companyName }}</h2>
         </div>
-        <div class="col-md-2">
-          <div class="hud-item">
-            <div class="label">Day</div>
-            <div class="value">{{ state.day }}</div>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="hud-item">
-            <div class="label">Cash</div>
-            <div class="value">{{ state.cash | currency: 'USD' : 'symbol' : '1.0-0' }}</div>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="hud-item">
-            <div class="label">Barrels</div>
-            <div class="value">{{ state.oilBarrels }}</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="hud-item">
-            <div class="label">Oil price</div>
-            <div class="value">{{ state.oilPrice | currency: 'USD' : 'symbol' : '1.0-0' }}/bbl</div>
-          </div>
-        </div>
+        <p class="font-mono text-sm tabular-nums text-[var(--ob-text-muted)]">
+          Seed {{ state.seed }}
+        </p>
       </div>
-      <p class="text-secondary small mt-2 mb-0">Seed {{ state.seed }}</p>
+
+      <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        <ob-stat-card label="Day" [showLamp]="true">
+          {{ state.day }}
+        </ob-stat-card>
+        <ob-stat-card label="Cash" tone="cash" [showLamp]="true">
+          <ob-money-value [amount]="state.cash" label="Cash" />
+        </ob-stat-card>
+        <ob-stat-card label="Barrels in stock" tone="oil" [showLamp]="true">
+          {{ state.oilBarrels | number: '1.0-0' }}
+        </ob-stat-card>
+        <ob-stat-card label="Oil price" tone="market" [showLamp]="true">
+          <ob-money-value [amount]="state.oilPrice" label="Oil price" />
+          <span class="text-sm font-normal text-[var(--ob-text-muted)]"> /bbl</span>
+        </ob-stat-card>
+        <ob-stat-card label="Operations" tone="production" [showLamp]="true">
+          {{ producingCount() }} producing
+        </ob-stat-card>
+      </div>
     </section>
 
-    <section class="actions mb-4 d-flex flex-wrap gap-2">
-      <button class="btn btn-success" type="button" (click)="advanceDay()" [disabled]="busy()">
-        Advance day
-      </button>
-      <button
-        class="btn btn-warning"
-        type="button"
-        (click)="sellOil()"
-        [disabled]="busy() || state.oilBarrels <= 0"
-      >
-        Sell oil
-      </button>
-      <button class="btn btn-outline-secondary" type="button" (click)="newGame()" [disabled]="busy()">
-        New game
-      </button>
-    </section>
+    <div class="mb-6">
+      <ob-toolbar label="Desk" ariaLabel="Game actions">
+        <ob-button variant="primary" (click)="advanceDay()" [disabled]="busy()">
+          Advance day
+        </ob-button>
+        <ob-button
+          variant="warning"
+          (click)="sellOil()"
+          [disabled]="busy() || state.oilBarrels <= 0"
+        >
+          Sell oil
+        </ob-button>
+        <ob-button variant="secondary" (click)="newGame()" [disabled]="busy()">
+          New game
+        </ob-button>
+      </ob-toolbar>
+    </div>
 
-    <section>
-      <h2 class="h5 mb-3">Land grid</h2>
+    <ob-panel variant="corporate" eyebrow="Exploration board" title="Land grid">
       <div class="plot-grid">
         @for (row of rows(); track $index) {
           <div class="plot-row">
             @for (plot of row; track plot.x + ',' + plot.y) {
-              <div
+              <article
                 class="plot"
                 [class.owned]="plot.owned"
                 [class.producing]="plot.producing"
                 [class.drilled]="plot.drilled"
               >
-                <div class="plot-coord">{{ plot.x }},{{ plot.y }}</div>
-                <div class="plot-status">{{ plotStatus(plot) }}</div>
-                <div class="plot-actions mt-2 d-flex flex-column gap-1">
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <p class="ob-label">Plot {{ plot.x }},{{ plot.y }}</p>
+                    <p class="plot-status mt-1">{{ plotStatus(plot) }}</p>
+                  </div>
+                  <ob-badge [variant]="plotBadgeVariant(plot)">
+                    {{ plotBadgeLabel(plot) }}
+                  </ob-badge>
+                </div>
+
+                <div class="mt-3 flex flex-col gap-1.5">
                   @if (!plot.owned) {
-                    <button
-                      class="btn btn-sm btn-primary"
-                      type="button"
+                    <ob-button
+                      size="sm"
+                      variant="primary"
                       (click)="buy(plot)"
                       [disabled]="busy()"
                     >
-                      Buy
-                    </button>
+                      Buy lease
+                    </ob-button>
                   }
                   @if (plot.owned && !plot.drilled) {
-                    <button
-                      class="btn btn-sm btn-secondary"
-                      type="button"
+                    <ob-button
+                      size="sm"
+                      variant="secondary"
                       (click)="drill(plot)"
                       [disabled]="busy()"
                     >
                       Drill
-                    </button>
+                    </ob-button>
                   }
                 </div>
-              </div>
+              </article>
             }
           </div>
         }
       </div>
-    </section>
+    </ob-panel>
   }
 </div>

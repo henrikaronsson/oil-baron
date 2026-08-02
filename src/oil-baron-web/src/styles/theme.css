@@ -1,0 +1,146 @@
+/* Oil Baron semantic design tokens — early-1970s corporate light theme */
+
+:root {
+  /* Surfaces */
+  --ob-page-bg: #e6dfd2;
+  --ob-surface-paper: #f5f0e6;
+  --ob-surface-raised: #ebe4d8;
+  --ob-surface-recessed: #ddd5c6;
+  --ob-surface-header: #d8cfc0;
+  --ob-surface-nav: #3a4554;
+  --ob-surface-control: #cfc6b6;
+  --ob-surface-document: #f8f4eb;
+  --ob-surface-terminal: #1e2430;
+
+  /* Text */
+  --ob-text-primary: #2a241c;
+  --ob-text-secondary: #5a5044;
+  --ob-text-muted: #7a6f60;
+  --ob-text-inverse: #f3eee4;
+  --ob-text-terminal: #e8d9a8;
+
+  /* Borders & dividers */
+  --ob-border: #b7ab97;
+  --ob-border-strong: #8a7c68;
+  --ob-divider: #cfc4b2;
+  --ob-divider-strong: #9a8c78;
+
+  /* Actions */
+  --ob-action-primary: #2f5f6b;
+  --ob-action-primary-hover: #274f59;
+  --ob-action-primary-border: #244a53;
+  --ob-action-primary-text: #f5f0e6;
+
+  --ob-action-secondary: #ebe4d8;
+  --ob-action-secondary-hover: #ddd5c6;
+  --ob-action-secondary-border: #8a7c68;
+  --ob-action-secondary-text: #2a241c;
+
+  --ob-action-financial: #4a6b45;
+  --ob-action-financial-hover: #3d5939;
+  --ob-action-financial-border: #355033;
+  --ob-action-financial-text: #f5f0e6;
+
+  --ob-action-warning: #b86b2c;
+  --ob-action-warning-hover: #9e5a24;
+  --ob-action-warning-border: #8a4f1f;
+  --ob-action-warning-text: #f5f0e6;
+
+  --ob-action-danger: #8b3a35;
+  --ob-action-danger-hover: #73302c;
+  --ob-action-danger-border: #652925;
+  --ob-action-danger-text: #f5f0e6;
+
+  --ob-action-quiet-text: #3a4554;
+  --ob-action-quiet-hover: #ddd5c6;
+
+  --ob-action-terminal: #1e2430;
+  --ob-action-terminal-hover: #2a3344;
+  --ob-action-terminal-border: #4a5568;
+  --ob-action-terminal-text: #e8d9a8;
+
+  /* Status */
+  --ob-state-success: #3f5f3c;
+  --ob-state-success-bg: #dce8d6;
+  --ob-state-success-border: #7a9a72;
+
+  --ob-state-warning: #8a5a1a;
+  --ob-state-warning-bg: #f0e2c4;
+  --ob-state-warning-border: #c49a4a;
+
+  --ob-state-danger: #7a322e;
+  --ob-state-danger-bg: #f0d8d4;
+  --ob-state-danger-border: #c07a72;
+
+  --ob-state-info: #2f4f5f;
+  --ob-state-info-bg: #d6e2e8;
+  --ob-state-info-border: #6a8a9a;
+
+  /* Game indicators */
+  --ob-indicator-oil: #2a1f14;
+  --ob-indicator-cash: #3f5f3c;
+  --ob-indicator-debt: #8b3a35;
+  --ob-indicator-production: #2f5f6b;
+  --ob-indicator-market: #5a4a2a;
+  --ob-indicator-reputation: #4a3f6b;
+  --ob-indicator-rival: #6b3a2a;
+
+  --ob-money-positive: #2f552c;
+  --ob-money-negative: #7a322e;
+
+  /* Interaction */
+  --ob-selected: #e8d9a8;
+  --ob-selected-border: #b89a4a;
+  --ob-disabled: #b7ab97;
+  --ob-focus: #2f5f6b;
+
+  /* Shape */
+  --ob-radius-sm: 0.125rem;
+  --ob-radius-md: 0.25rem;
+  --ob-shadow-panel: 0 1px 2px rgb(42 36 28 / 0.08), 0 1px 0 rgb(255 255 255 / 0.35) inset;
+  --ob-shadow-document: 0 1px 3px rgb(42 36 28 / 0.1);
+
+  /* Typography */
+  --ob-font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --ob-font-body: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --ob-font-mono: 'IBM Plex Mono', 'Consolas', monospace;
+}
+
+@theme inline {
+  --font-display: var(--ob-font-display);
+  --font-sans: var(--ob-font-body);
+  --font-mono: var(--ob-font-mono);
+
+  --color-ob-page: var(--ob-page-bg);
+  --color-ob-paper: var(--ob-surface-paper);
+  --color-ob-raised: var(--ob-surface-raised);
+  --color-ob-recessed: var(--ob-surface-recessed);
+  --color-ob-header: var(--ob-surface-header);
+  --color-ob-nav: var(--ob-surface-nav);
+  --color-ob-control: var(--ob-surface-control);
+  --color-ob-document: var(--ob-surface-document);
+  --color-ob-terminal: var(--ob-surface-terminal);
+
+  --color-ob-ink: var(--ob-text-primary);
+  --color-ob-ink-secondary: var(--ob-text-secondary);
+  --color-ob-ink-muted: var(--ob-text-muted);
+  --color-ob-ink-inverse: var(--ob-text-inverse);
+  --color-ob-ink-terminal: var(--ob-text-terminal);
+
+  --color-ob-border: var(--ob-border);
+  --color-ob-border-strong: var(--ob-border-strong);
+  --color-ob-divider: var(--ob-divider);
+  --color-ob-divider-strong: var(--ob-divider-strong);
+
+  --color-ob-primary: var(--ob-action-primary);
+  --color-ob-financial: var(--ob-action-financial);
+  --color-ob-warning: var(--ob-action-warning);
+  --color-ob-danger: var(--ob-action-danger);
+
+  --color-ob-focus: var(--ob-focus);
+  --color-ob-selected: var(--ob-selected);
+  --color-ob-oil: var(--ob-indicator-oil);
+  --color-ob-cash: var(--ob-indicator-cash);
+  --color-ob-production: var(--ob-indicator-production);
+  --color-ob-market: var(--ob-indicator-market);
+}

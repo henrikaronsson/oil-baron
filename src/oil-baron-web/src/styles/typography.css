@@ -1,0 +1,42 @@
+/* Typography conventions for the Oil Baron UI */
+
+body {
+  font-family: var(--ob-font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ob-text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.ob-display {
+  font-family: var(--ob-font-display);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-wrap: balance;
+}
+
+.ob-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ob-text-muted);
+}
+
+.ob-mono,
+.ob-tabular {
+  font-family: var(--ob-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.ob-section-title {
+  font-family: var(--ob-font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ob-text-primary);
+}

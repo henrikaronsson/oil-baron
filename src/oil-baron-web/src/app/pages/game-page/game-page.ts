@@ -1,14 +1,37 @@
-import { CurrencyPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { GameStateDto, PlotDto } from '../../models/game-state';
 import { GameApiService } from '../../services/game-api.service';
+import {
+  ObAlert,
+  ObBadge,
+  ObBadgeVariant,
+  ObButton,
+  ObFormField,
+  ObMoneyValue,
+  ObPanel,
+  ObStatCard,
+  ObToolbar,
+  OB_INPUT_CLASSES,
+} from '../../ui';
 
 @Component({
   selector: 'app-game-page',
-  imports: [FormsModule, CurrencyPipe],
+  imports: [
+    FormsModule,
+    DecimalPipe,
+    ObAlert,
+    ObBadge,
+    ObButton,
+    ObFormField,
+    ObMoneyValue,
+    ObPanel,
+    ObStatCard,
+    ObToolbar,
+  ],
   templateUrl: './game-page.html',
   styleUrl: './game-page.scss',
 })
@@ -18,6 +41,7 @@ export class GamePage {
   readonly game = signal<GameStateDto | null>(null);
   readonly error = signal<string | null>(null);
   readonly busy = signal(false);
+  readonly inputClasses = OB_INPUT_CLASSES;
 
   companyName = 'Acme Oil';
   seedInput = '';
@@ -42,6 +66,10 @@ export class GamePage {
     }
     return grid;
   });
+
+  readonly producingCount = computed(
+    () => this.game()?.plots.filter((p) => p.producing).length ?? 0,
+  );
 
   startGame(): void {
     const name = this.companyName.trim();
@@ -108,6 +136,32 @@ export class GamePage {
       return `Producing (${plot.remainingReserve} left)`;
     }
     return 'Dry / depleted';
+  }
+
+  plotBadgeVariant(plot: PlotDto): ObBadgeVariant {
+    if (!plot.owned) {
+      return 'neutral';
+    }
+    if (plot.producing) {
+      return 'success';
+    }
+    if (plot.drilled) {
+      return 'warning';
+    }
+    return 'info';
+  }
+
+  plotBadgeLabel(plot: PlotDto): string {
+    if (!plot.owned) {
+      return 'Open';
+    }
+    if (plot.producing) {
+      return 'Flowing';
+    }
+    if (plot.drilled) {
+      return 'Dry';
+    }
+    return 'Held';
   }
 
   private run(request: () => Observable<GameStateDto>): void {

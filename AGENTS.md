@@ -42,7 +42,8 @@ Follow every documented convention.
 ## Frontend rules (Angular)
 
 - Standalone components (no NgModules unless required).
-- Bootstrap 5 + SCSS.
+- Tailwind CSS 4 + semantic Oil Baron tokens (see [docs/tailwind.md](docs/tailwind.md)).
+- Component SCSS where needed; global theme in `src/styles/`.
 - Services for HTTP; lean components.
 - Prefer signals and/or RxJS where natural; no global state libraries unless requested.
 
