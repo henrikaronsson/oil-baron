@@ -2,7 +2,7 @@
 
 Base URL (local): `http://localhost:5080`
 
-JSON via Newtonsoft.Json, camelCase property names.
+JSON responses use camelCase property names.
 
 ## Health
 

@@ -4,18 +4,18 @@ Open-source, browser-based oil company management simulation. Inspired by classi
 
 ## Stack
 
-- **Backend:** .NET 10 Web API, Newtonsoft.Json
-- **Game rules:** `OilBaron.Game` (pure C# library; deterministic, seeded)
 - **Frontend:** Angular 20, standalone components, Tailwind CSS 4, SCSS (components) + global CSS theme
-- **Persistence (MVP):** in-memory only (games are lost when the API restarts)
+- **Backend:** .NET 10 Web API
+- **Game rules:** `OilBaron.Game` (pure C# library; deterministic, seeded)
+- **Persistence (MVP):** in-memory only, for now ...
 
 ## Repository layout
 
 ```text
 docs/                     Design and architecture docs
-src/OilBaron.Game/        Deterministic simulation (business rules)
-src/OilBaron.Api/         HTTP API + in-memory game store
 src/oil-baron-web/        Angular client (presentation only)
+src/OilBaron.Api/         HTTP API + in-memory game store
+src/OilBaron.Game/        Deterministic simulation (business rules)
 tests/OilBaron.Game.Tests/
 ```
 

@@ -31,7 +31,6 @@ Follow every documented convention.
 - `OilBaron.Api` maps HTTP to game commands and stores sessions; it must not invent economy rules.
 - `oil-baron-web` sends intents and renders state; it must not compute prices, production, or validity beyond disabling controls from server state / errors.
 - Prefer simple controllers/endpoints + services. No Clean Architecture ceremony.
-- Serialization: **Newtonsoft.Json**.
 
 ## Simulation rules
 

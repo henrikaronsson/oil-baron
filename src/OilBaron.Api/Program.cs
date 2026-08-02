@@ -1,5 +1,5 @@
-using Newtonsoft.Json.Serialization;
 using OilBaron.Api.Services;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,10 +8,10 @@ builder.Services.AddSingleton<IGameSessionService, GameSessionService>();
 
 builder.Services
     .AddControllers()
-    .AddNewtonsoftJson(options =>
+    .AddJsonOptions(options =>
     {
-        options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-        options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Include;
+        options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.Never;
     });
 
 builder.Services.AddCors(options =>
