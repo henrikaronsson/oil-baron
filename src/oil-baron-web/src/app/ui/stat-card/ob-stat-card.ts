@@ -25,6 +25,9 @@ const TONE_CLASSES: Record<ObStatTone, string> = {
             aria-hidden="true"
           ></span>
         }
+        @if (icon) {
+          <img [src]="icon" alt="" class="h-5 w-5" aria-hidden="true" />
+        }
         <p class="ob-label">{{ label }}</p>
       </div>
       <p
@@ -40,6 +43,8 @@ export class ObStatCard {
   @Input({ required: true }) label!: string;
   @Input() tone: ObStatTone = 'default';
   @Input() showLamp = false;
+  @Input() icon = '';
+
 
   protected readonly TONE_CLASSES = TONE_CLASSES;
 

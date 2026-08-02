@@ -12,7 +12,7 @@ Open-source, browser-based oil company management simulation. Inspired by classi
 - **Backend:** .NET 10 Web API
 - **Game rules:** `OilBaron.Game` (pure C# library; deterministic, seeded)
 - **Persistence (MVP):** in-memory only, for now ...
-
+z§
 ## Repository layout
 
 ```text
