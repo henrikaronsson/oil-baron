@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/icons/oil-pump.png" alt="Oil Baron" width="128" />
+  <img src="docs/icons/pump.png" alt="Oil Baron" width="128" />
 </p>
 
 # Oil Baron
