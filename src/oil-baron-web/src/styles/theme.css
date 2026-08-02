@@ -101,8 +101,8 @@
   --ob-shadow-document: 0 1px 3px rgb(42 36 28 / 0.1);
 
   /* Typography */
-  --ob-font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
-  --ob-font-body: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --ob-font-display: 'Oswald', 'Arial Narrow', sans-serif;
+  --ob-font-body: 'Libre Franklin', 'Segoe UI', sans-serif;
   --ob-font-mono: 'IBM Plex Mono', 'Consolas', monospace;
 }
 

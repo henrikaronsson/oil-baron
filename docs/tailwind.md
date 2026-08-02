@@ -97,8 +97,8 @@ Do not convert the whole app into a dark dashboard.
 
 Loaded in `index.html` (Google Fonts):
 
-- **Display:** Barlow Condensed — mastheads and section titles
-- **Body:** Source Sans 3 — readable UI copy
+- **Display:** Oswald — mastheads and section titles
+- **Body:** Libre Franklin — readable UI copy
 - **Mono:** IBM Plex Mono — cash, prices, seeds, production figures
 
 Helpers in `typography.css`: `.ob-label`, `.ob-mono`, `.ob-tabular`, `.ob-section-title`.
