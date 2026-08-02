@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/icons/oil-pump.png" alt="Oil Baron" width="128" />
+</p>
+
 # Oil Baron
 
 Open-source, browser-based oil company management simulation. Inspired by classic business strategy games, with original mechanics, assets, and code.
