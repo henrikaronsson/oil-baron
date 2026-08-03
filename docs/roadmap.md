@@ -3,7 +3,7 @@
 ## Done (this MVP slice)
 
 - [x] Repository, docs, MIT license
-- [x] Deterministic `OilBaron.Game` (buy / drill / advance day / sell)
+- [x] Deterministic `OilBaron.Game` (buy / drill / advance month / sell)
 - [x] In-memory API
 - [x] Angular HUD + 3×3 grid
 - [x] Unit tests for economy and determinism
@@ -12,7 +12,7 @@
 
 - [ ] Persist games (SQLite or similar)
 - [ ] Survey action / fog of war for reserves
-- [ ] Daily operating costs
+- [x] Monthly production + operating costs per oil field
 - [ ] Stronger feedback (toast errors, dry-hole messaging)
 - [ ] Larger map / varied terrain
 - [ ] AI rival or second company (keep rules server-side)

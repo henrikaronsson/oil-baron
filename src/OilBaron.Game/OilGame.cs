@@ -15,7 +15,7 @@ public static class OilGame
         var actualSeed = seed ?? Random.Shared.Next();
         var rng = new Random(actualSeed);
         var size = EconomyConstants.GridSize;
-        var plots = new Plot[size, size];
+        var oilFields = new OilField[size, size];
 
         for (var y = 0; y < size; y++)
         {
@@ -23,7 +23,14 @@ public static class OilGame
             {
                 var steps = rng.Next(0, EconomyConstants.ReserveMaxSteps + 1);
                 var reserve = steps * EconomyConstants.ReserveStep;
-                plots[x, y] = new Plot(x, y, reserve);
+                oilFields[x, y] = new OilField(
+                    x,
+                    y,
+                    EconomyConstants.DefaultPurchasePrice,
+                    EconomyConstants.DefaultMonthlyProduction,
+                    EconomyConstants.DefaultOperatingCostPerMonth,
+                    estimatedReserves: reserve,
+                    remainingReserves: reserve);
             }
         }
 
@@ -31,51 +38,51 @@ public static class OilGame
             id ?? Guid.NewGuid(),
             companyName.Trim(),
             actualSeed,
-            EconomyConstants.StartingDay,
+            EconomyConstants.StartingMonth,
             EconomyConstants.StartingCash,
             EconomyConstants.StartingOilBarrels,
             EconomyConstants.StartingOilPrice,
-            plots,
+            oilFields,
             rng);
     }
 
-    public static GameCommandResult BuyPlot(GameState state, int x, int y)
+    public static GameCommandResult BuyOilField(GameState state, int x, int y)
     {
-        if (!TryGetPlot(state, x, y, out var plot))
+        if (!TryGetOilField(state, x, y, out var field))
         {
-            return GameCommandResult.Fail("Plot coordinates are out of range.");
+            return GameCommandResult.Fail("Oil field coordinates are out of range.");
         }
 
-        if (plot.Owned)
+        if (field.Owned)
         {
-            return GameCommandResult.Fail("Plot is already owned.");
+            return GameCommandResult.Fail("Oil field is already owned.");
         }
 
-        if (state.Cash < EconomyConstants.PlotBuyCost)
+        if (state.Cash < field.PurchasePrice)
         {
-            return GameCommandResult.Fail("Insufficient cash to buy plot.");
+            return GameCommandResult.Fail("Insufficient cash to buy oil field.");
         }
 
-        state.Cash -= EconomyConstants.PlotBuyCost;
-        plot.Owned = true;
+        state.Cash -= field.PurchasePrice;
+        field.Owned = true;
         return GameCommandResult.Ok();
     }
 
-    public static GameCommandResult DrillPlot(GameState state, int x, int y)
+    public static GameCommandResult DrillOilField(GameState state, int x, int y)
     {
-        if (!TryGetPlot(state, x, y, out var plot))
+        if (!TryGetOilField(state, x, y, out var field))
         {
-            return GameCommandResult.Fail("Plot coordinates are out of range.");
+            return GameCommandResult.Fail("Oil field coordinates are out of range.");
         }
 
-        if (!plot.Owned)
+        if (!field.Owned)
         {
-            return GameCommandResult.Fail("Cannot drill a plot you do not own.");
+            return GameCommandResult.Fail("Cannot drill an oil field you do not own.");
         }
 
-        if (plot.Drilled)
+        if (field.Drilled)
         {
-            return GameCommandResult.Fail("Plot is already drilled.");
+            return GameCommandResult.Fail("Oil field is already drilled.");
         }
 
         if (state.Cash < EconomyConstants.DrillCost)
@@ -84,26 +91,27 @@ public static class OilGame
         }
 
         state.Cash -= EconomyConstants.DrillCost;
-        plot.Drilled = true;
+        field.Drilled = true;
         return GameCommandResult.Ok();
     }
 
-    public static GameCommandResult AdvanceDay(GameState state)
+    public static GameCommandResult AdvanceMonth(GameState state)
     {
         var size = state.GridSize;
         for (var y = 0; y < size; y++)
         {
             for (var x = 0; x < size; x++)
             {
-                var plot = state.Plots[x, y];
-                if (!plot.Producing)
+                var field = state.OilFields[x, y];
+                if (!field.Producing)
                 {
                     continue;
                 }
 
-                var output = Math.Max(1, plot.RemainingReserve / 100);
-                var produced = Math.Min(output, plot.RemainingReserve);
-                plot.RemainingReserve -= produced;
+                state.Cash -= field.OperatingCostPerMonth;
+
+                var produced = Math.Min(field.MonthlyProduction, field.RemainingReserves);
+                field.RemainingReserves -= produced;
                 state.OilBarrels += produced;
             }
         }
@@ -116,7 +124,7 @@ public static class OilGame
             EconomyConstants.OilPriceMin,
             EconomyConstants.OilPriceMax);
 
-        state.Day += 1;
+        state.Month += 1;
         return GameCommandResult.Ok();
     }
 
@@ -133,16 +141,16 @@ public static class OilGame
         return GameCommandResult.Ok();
     }
 
-    private static bool TryGetPlot(GameState state, int x, int y, out Plot plot)
+    private static bool TryGetOilField(GameState state, int x, int y, out OilField field)
     {
         var size = state.GridSize;
         if (x < 0 || y < 0 || x >= size || y >= size)
         {
-            plot = null!;
+            field = null!;
             return false;
         }
 
-        plot = state.Plots[x, y];
+        field = state.OilFields[x, y];
         return true;
     }
 }

@@ -21,16 +21,16 @@ export class GameApiService {
     return this.http.get<GameStateDto>(`${API_BASE}/games/${id}`);
   }
 
-  buyPlot(id: string, x: number, y: number): Observable<GameStateDto> {
-    return this.http.post<GameStateDto>(`${API_BASE}/games/${id}/plots/${x}/${y}/buy`, {});
+  buyField(id: string, x: number, y: number): Observable<GameStateDto> {
+    return this.http.post<GameStateDto>(`${API_BASE}/games/${id}/fields/${x}/${y}/buy`, {});
   }
 
-  drillPlot(id: string, x: number, y: number): Observable<GameStateDto> {
-    return this.http.post<GameStateDto>(`${API_BASE}/games/${id}/plots/${x}/${y}/drill`, {});
+  drillField(id: string, x: number, y: number): Observable<GameStateDto> {
+    return this.http.post<GameStateDto>(`${API_BASE}/games/${id}/fields/${x}/${y}/drill`, {});
   }
 
-  advanceDay(id: string): Observable<GameStateDto> {
-    return this.http.post<GameStateDto>(`${API_BASE}/games/${id}/advance-day`, {});
+  advanceMonth(id: string): Observable<GameStateDto> {
+    return this.http.post<GameStateDto>(`${API_BASE}/games/${id}/advance-month`, {});
   }
 
   sellOil(id: string): Observable<GameStateDto> {

@@ -18,13 +18,13 @@ public sealed class GameSessionService(InMemoryGameStore store) : IGameSessionSe
     }
 
     public (GameStateDto? State, string? Error, bool NotFound) Buy(Guid id, int x, int y)
-        => Mutate(id, s => OilGame.BuyPlot(s, x, y));
+        => Mutate(id, s => OilGame.BuyOilField(s, x, y));
 
     public (GameStateDto? State, string? Error, bool NotFound) Drill(Guid id, int x, int y)
-        => Mutate(id, s => OilGame.DrillPlot(s, x, y));
+        => Mutate(id, s => OilGame.DrillOilField(s, x, y));
 
-    public (GameStateDto? State, string? Error, bool NotFound) AdvanceDay(Guid id)
-        => Mutate(id, OilGame.AdvanceDay);
+    public (GameStateDto? State, string? Error, bool NotFound) AdvanceMonth(Guid id)
+        => Mutate(id, OilGame.AdvanceMonth);
 
     public (GameStateDto? State, string? Error, bool NotFound) SellOil(Guid id)
         => Mutate(id, OilGame.SellOil);

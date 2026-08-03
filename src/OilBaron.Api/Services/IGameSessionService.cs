@@ -9,6 +9,6 @@ public interface IGameSessionService
     GameStateDto? Get(Guid id);
     (GameStateDto? State, string? Error, bool NotFound) Buy(Guid id, int x, int y);
     (GameStateDto? State, string? Error, bool NotFound) Drill(Guid id, int x, int y);
-    (GameStateDto? State, string? Error, bool NotFound) AdvanceDay(Guid id);
+    (GameStateDto? State, string? Error, bool NotFound) AdvanceMonth(Guid id);
     (GameStateDto? State, string? Error, bool NotFound) SellOil(Guid id);
 }

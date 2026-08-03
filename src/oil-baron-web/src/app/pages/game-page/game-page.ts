@@ -4,7 +4,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
-import { GameStateDto, PlotDto } from '../../models/game-state';
+import { GameStateDto, OilFieldDto } from '../../models/game-state';
 import { GameApiService } from '../../services/game-api.service';
 import {
   ObAlert,
@@ -51,17 +51,17 @@ export class GamePage {
   readonly rows = computed(() => {
     const state = this.game();
     if (!state) {
-      return [] as PlotDto[][];
+      return [] as OilFieldDto[][];
     }
 
     const size = state.gridSize;
-    const grid: PlotDto[][] = [];
+    const grid: OilFieldDto[][] = [];
     for (let y = 0; y < size; y++) {
-      const row: PlotDto[] = [];
+      const row: OilFieldDto[] = [];
       for (let x = 0; x < size; x++) {
-        const plot = state.plots.find((p) => p.x === x && p.y === y);
-        if (plot) {
-          row.push(plot);
+        const field = state.oilFields.find((f) => f.x === x && f.y === y);
+        if (field) {
+          row.push(field);
         }
       }
       grid.push(row);
@@ -70,8 +70,37 @@ export class GamePage {
   });
 
   readonly producingCount = computed(
-    () => this.game()?.plots.filter((p) => p.producing).length ?? 0,
+    () => this.game()?.oilFields.filter((f) => f.producing).length ?? 0,
   );
+
+  private static readonly monthNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ] as const;
+
+  /** Renders server calendar fields as "Jan 1". */
+  formatCalendarDate(state: GameStateDto): string {
+    const monthName = GamePage.monthNames[state.calendarMonth - 1];
+    if (
+      state.calendarYear == null ||
+      state.calendarMonth == null ||
+      state.calendarDay == null ||
+      !monthName
+    ) {
+      return '—';
+    }
+    return `${monthName} ${state.calendarDay}`;
+  }
 
   startGame(): void {
     const name = this.companyName.trim();
@@ -90,28 +119,28 @@ export class GamePage {
     this.run(() => this.api.createGame(name, seed));
   }
 
-  buy(plot: PlotDto): void {
+  buy(field: OilFieldDto): void {
     const id = this.game()?.id;
     if (!id) {
       return;
     }
-    this.run(() => this.api.buyPlot(id, plot.x, plot.y));
+    this.run(() => this.api.buyField(id, field.x, field.y));
   }
 
-  drill(plot: PlotDto): void {
+  drill(field: OilFieldDto): void {
     const id = this.game()?.id;
     if (!id) {
       return;
     }
-    this.run(() => this.api.drillPlot(id, plot.x, plot.y));
+    this.run(() => this.api.drillField(id, field.x, field.y));
   }
 
-  advanceDay(): void {
+  advanceMonth(): void {
     const id = this.game()?.id;
     if (!id) {
       return;
     }
-    this.run(() => this.api.advanceDay(id));
+    this.run(() => this.api.advanceMonth(id));
   }
 
   sellOil(): void {
@@ -127,40 +156,40 @@ export class GamePage {
     this.error.set(null);
   }
 
-  plotStatus(plot: PlotDto): string {
-    if (!plot.owned) {
+  fieldStatus(field: OilFieldDto): string {
+    if (!field.owned) {
       return 'Available';
     }
-    if (!plot.drilled) {
+    if (!field.drilled) {
       return 'Owned';
     }
-    if (plot.producing) {
-      return `Producing (${plot.remainingReserve} left)`;
+    if (field.producing) {
+      return `Producing (${field.remainingReserves} left)`;
     }
     return 'Dry / depleted';
   }
 
-  plotBadgeVariant(plot: PlotDto): ObBadgeVariant {
-    if (!plot.owned) {
+  fieldBadgeVariant(field: OilFieldDto): ObBadgeVariant {
+    if (!field.owned) {
       return 'neutral';
     }
-    if (plot.producing) {
+    if (field.producing) {
       return 'success';
     }
-    if (plot.drilled) {
+    if (field.drilled) {
       return 'warning';
     }
     return 'info';
   }
 
-  plotBadgeLabel(plot: PlotDto): string {
-    if (!plot.owned) {
+  fieldBadgeLabel(field: OilFieldDto): string {
+    if (!field.owned) {
       return 'Open';
     }
-    if (plot.producing) {
+    if (field.producing) {
       return 'Flowing';
     }
-    if (plot.drilled) {
+    if (field.drilled) {
       return 'Dry';
     }
     return 'Held';

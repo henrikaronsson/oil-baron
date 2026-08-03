@@ -238,7 +238,7 @@ See `game-page.html` — `ob-stat-card` grid with cash (`ob-money-value`), barre
 
 ### Explicit status mapping
 
-`plotBadgeVariant()` / `plotBadgeLabel()` in `game-page.ts` map plot state to `ObBadgeVariant` without dynamic Tailwind class construction.
+`fieldBadgeVariant()` / `fieldBadgeLabel()` in `game-page.ts` map oil field state to `ObBadgeVariant` without dynamic Tailwind class construction.
 
 ## Validation checklist
 

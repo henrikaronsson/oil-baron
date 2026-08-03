@@ -28,8 +28,8 @@ MVP: `ConcurrentDictionary<Guid, GameState>` in the API process. Restart clears 
 
 `GameState` owns a seeded random sequence used for:
 
-- Initial plot reserves
-- Daily oil price deltas
+- Initial oil field reserves
+- Monthly oil price deltas
 
 Do not use wall-clock time or unseeded RNG for outcomes.
 

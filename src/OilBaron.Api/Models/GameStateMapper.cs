@@ -6,35 +6,44 @@ public static class GameStateMapper
 {
     public static GameStateDto ToDto(GameState state)
     {
-        var plots = new List<PlotDto>();
+        var oilFields = new List<OilFieldDto>();
         for (var y = 0; y < state.GridSize; y++)
         {
             for (var x = 0; x < state.GridSize; x++)
             {
-                var plot = state.Plots[x, y];
-                plots.Add(new PlotDto
+                var field = state.OilFields[x, y];
+                oilFields.Add(new OilFieldDto
                 {
-                    X = plot.X,
-                    Y = plot.Y,
-                    Owned = plot.Owned,
-                    Drilled = plot.Drilled,
-                    Producing = plot.Producing,
-                    RemainingReserve = plot.Drilled ? plot.RemainingReserve : null
+                    X = field.X,
+                    Y = field.Y,
+                    Owned = field.Owned,
+                    Drilled = field.Drilled,
+                    Producing = field.Producing,
+                    PurchasePrice = field.PurchasePrice,
+                    MonthlyProduction = field.MonthlyProduction,
+                    OperatingCostPerMonth = field.OperatingCostPerMonth,
+                    EstimatedReserves = field.EstimatedReserves,
+                    RemainingReserves = field.Drilled ? field.RemainingReserves : null
                 });
             }
         }
+
+        var (year, calendarMonth, day) = GameCalendar.FromMonthIndex(state.Month);
 
         return new GameStateDto
         {
             Id = state.Id,
             CompanyName = state.CompanyName,
             Seed = state.Seed,
-            Day = state.Day,
+            Month = state.Month,
+            CalendarYear = year,
+            CalendarMonth = calendarMonth,
+            CalendarDay = day,
             Cash = state.Cash,
             OilBarrels = state.OilBarrels,
             OilPrice = state.OilPrice,
             GridSize = state.GridSize,
-            Plots = plots
+            OilFields = oilFields
         };
     }
 }

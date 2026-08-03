@@ -31,26 +31,26 @@ public sealed class GamesController(IGameSessionService games) : ControllerBase
         return state is null ? NotFound() : state;
     }
 
-    [HttpPost("{id:guid}/plots/{x:int}/{y:int}/buy")]
+    [HttpPost("{id:guid}/fields/{x:int}/{y:int}/buy")]
     [ProducesResponseType(typeof(GameStateDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult<GameStateDto> Buy(Guid id, int x, int y)
         => FromMutation(games.Buy(id, x, y));
 
-    [HttpPost("{id:guid}/plots/{x:int}/{y:int}/drill")]
+    [HttpPost("{id:guid}/fields/{x:int}/{y:int}/drill")]
     [ProducesResponseType(typeof(GameStateDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult<GameStateDto> Drill(Guid id, int x, int y)
         => FromMutation(games.Drill(id, x, y));
 
-    [HttpPost("{id:guid}/advance-day")]
+    [HttpPost("{id:guid}/advance-month")]
     [ProducesResponseType(typeof(GameStateDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public ActionResult<GameStateDto> AdvanceDay(Guid id)
-        => FromMutation(games.AdvanceDay(id));
+    public ActionResult<GameStateDto> AdvanceMonth(Guid id)
+        => FromMutation(games.AdvanceMonth(id));
 
     [HttpPost("{id:guid}/sell-oil")]
     [ProducesResponseType(typeof(GameStateDto), StatusCodes.Status200OK)]
