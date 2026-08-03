@@ -2,7 +2,7 @@
 
 Oil Baron is an open-source, browser-based oil company management simulation.
 
-Players run a small oil company: acquire land, drill wells, produce barrels, and sell into a shifting market. The tone is classic business strategy — planning, cash discipline, and map decisions — set in the early 1970s (campaign start: January 1972), with **original** mechanics, assets, and code.
+Players run a small oil company: acquire land, drill wells, produce barrels, and sell into a shifting market. The tone is classic business strategy — planning, cash discipline, and map decisions — set in the early 1970s (campaign start: January 1972), with **original** mechanics, assets, and code. Longer term, play is managed from a period office desk hub (maps, files, phone, teletype) rather than a pure dashboard.
 
 ## Goals
 

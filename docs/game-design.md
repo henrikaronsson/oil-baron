@@ -2,7 +2,7 @@
 
 ## Setting
 
-The campaign opens in **January 1972**, in the calm before the first oil crisis of October 1973. Tone, technology, and presentation lean early-1970s corporate (see [tailwind.md](tailwind.md)).
+The campaign opens in **January 1972**, in the calm before the first oil crisis of October 1973. Tone, technology, and presentation lean early-1970s corporate (see [tailwind.md](tailwind.md)). Future versions manage the company from a behind-the-desk HQ office (prototype at `/office`); the MVP still uses the HUD and 3×3 grid.
 
 ## MVP loop (current)
 

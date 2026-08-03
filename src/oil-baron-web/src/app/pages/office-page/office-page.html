@@ -1,0 +1,51 @@
+<main class="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+  <header class="mb-6 flex flex-wrap items-end justify-between gap-4 border-b border-[var(--ob-divider-strong)] pb-4">
+    <div>
+      <p class="ob-label mb-1">Headquarters preview</p>
+      <h1 class="font-display text-3xl tracking-[0.08em] text-[var(--ob-text-primary)] sm:text-4xl">
+        Continental Petroleum — Headquarters, 1973
+      </h1>
+      <p class="mt-2 max-w-2xl text-sm text-[var(--ob-text-secondary)]">
+        You sit behind the desk. Click an object to inspect it — future builds will open management
+        tools from this room.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-4 text-sm">
+      <a
+        routerLink="/"
+        class="font-semibold text-[var(--ob-link)] underline underline-offset-4 hover:text-[var(--ob-link-hover)]"
+      >
+        Back to game
+      </a>
+      <a
+        routerLink="/showcase"
+        class="font-semibold text-[var(--ob-link)] underline underline-offset-4 hover:text-[var(--ob-link-hover)]"
+      >
+        Component showcase
+      </a>
+    </div>
+  </header>
+
+  <div class="grid items-start gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+    <app-office-desk-scene
+      [selectedId]="selectedId()"
+      (hotspotSelect)="onHotspotSelect($event)"
+    />
+
+    @if (selectedDetail(); as detail) {
+      <ob-panel variant="document" eyebrow="Desk object" [title]="detail.label">
+        <p class="text-[var(--ob-text-secondary)]">{{ detail.blurb }}</p>
+        <p class="mt-4 border-t border-[var(--ob-divider)] pt-3 text-sm text-[var(--ob-text-muted)]">
+          In a future build, this opens: {{ detail.futureAction }}
+        </p>
+      </ob-panel>
+    } @else {
+      <ob-panel variant="corporate" eyebrow="Inspection" title="Click an object on the desk">
+        <p class="text-[var(--ob-text-secondary)]">
+          Map, charts, rotary phone, newspaper, filing cabinet, and computer are hotspots. Selection
+          is local UI only — no game commands yet.
+        </p>
+      </ob-panel>
+    }
+  </div>
+</main>

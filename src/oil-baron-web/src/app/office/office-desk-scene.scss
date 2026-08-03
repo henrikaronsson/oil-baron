@@ -1,0 +1,58 @@
+.office-scene {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--ob-border-strong);
+  border-radius: var(--ob-radius-md);
+  background: var(--ob-surface-recessed);
+  box-shadow: var(--ob-shadow-panel);
+  aspect-ratio: 10 / 7;
+}
+
+.office-scene__art {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.office-hotspot {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0.35rem;
+  border: 2px solid color-mix(in srgb, var(--ob-border) 50%, transparent);
+  border-radius: var(--ob-radius-sm);
+  background: color-mix(in srgb, var(--ob-surface-document) 55%, transparent);
+  box-shadow: var(--ob-shadow-panel);
+  cursor: pointer;
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    box-shadow 120ms ease,
+    transform 120ms ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: color-mix(in srgb, var(--ob-action-primary) 70%, transparent);
+    background: color-mix(in srgb, var(--ob-surface-document) 80%, transparent);
+    outline: none;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--ob-action-primary) 35%, transparent);
+    transform: translateY(-1px);
+  }
+
+  &--selected {
+    border-color: var(--ob-action-primary);
+    background: color-mix(in srgb, var(--ob-surface-document) 85%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--ob-action-primary) 40%, transparent);
+  }
+}
+
+.office-hotspot__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}

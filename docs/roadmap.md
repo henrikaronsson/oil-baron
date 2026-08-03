@@ -21,5 +21,6 @@
 
 - Multiplayer sessions
 - Pipelines, storage caps, refining
+- HQ office desk hub (`/office` prototype exists; wire hotspots to real game flows)
 - Polish UI / original art
 - Hosted demo deployment
