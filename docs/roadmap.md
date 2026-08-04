@@ -1,5 +1,7 @@
 # Roadmap
 
+Player-facing view: `/roadmap` in the Angular client (“Field development sequence”) — same order, no dates, framed as a well log.
+
 ## Done (this MVP slice)
 
 - [x] Repository, docs, MIT license

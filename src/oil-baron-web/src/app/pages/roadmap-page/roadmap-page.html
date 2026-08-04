@@ -1,0 +1,97 @@
+<main class="mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-8">
+  <header class="mb-8 flex flex-wrap items-end justify-between gap-4 border-b border-[var(--ob-divider-strong)] pb-4">
+    <div>
+      <p class="ob-label mb-1">Confidential · board prospectus</p>
+      <h1 class="font-display text-4xl tracking-[0.08em] text-[var(--ob-text-primary)] sm:text-5xl">
+        Field development sequence
+      </h1>
+      <p class="mt-2 max-w-xl text-[var(--ob-text-secondary)]">
+        No calendars. No promises. Just the order we sink the next string of pipe —
+        from pay dirt already struck to horizons still on the survey map.
+      </p>
+    </div>
+    <a
+      routerLink="/"
+      class="font-semibold text-[var(--ob-link)] underline underline-offset-4 hover:text-[var(--ob-link-hover)]"
+    >
+      Back to game
+    </a>
+  </header>
+
+  <ob-panel
+    variant="document"
+    eyebrow="Geological analogy"
+    title="Read the well log top-down"
+    bodyClass="space-y-3"
+  >
+    <p class="text-[var(--ob-text-secondary)]">
+      Each stratum is a phase of the product. We finish the layer above before we
+      chase the next pay zone. Sequence beats schedule.
+    </p>
+    <ul class="flex flex-wrap gap-3 text-sm">
+      <li class="flex items-center gap-2">
+        <ob-badge variant="success">Struck</ob-badge>
+        <span class="text-[var(--ob-text-muted)]">Already producing</span>
+      </li>
+      <li class="flex items-center gap-2">
+        <ob-badge variant="warning">Drilling</ob-badge>
+        <span class="text-[var(--ob-text-muted)]">Bit in the hole</span>
+      </li>
+      <li class="flex items-center gap-2">
+        <ob-badge variant="info">Prospect</ob-badge>
+        <span class="text-[var(--ob-text-muted)]">On the map, not the rig</span>
+      </li>
+    </ul>
+  </ob-panel>
+
+  <ol class="roadmap-log mt-8" aria-label="Development strata in order">
+    @for (stratum of strata; track stratum.depth) {
+      <li class="roadmap-stratum" [attr.data-status]="stratum.status">
+        <div class="roadmap-spine" aria-hidden="true">
+          <span class="roadmap-depth ob-mono">{{ stratum.depth }}</span>
+          <span class="roadmap-bit"></span>
+        </div>
+
+        <article class="roadmap-card">
+          <header class="roadmap-card__head">
+            <div class="flex min-w-0 flex-1 items-start gap-3">
+              <span
+                class="roadmap-icon"
+                [class.roadmap-icon--struck]="stratum.status === 'struck'"
+                [class.roadmap-icon--drilling]="stratum.status === 'drilling'"
+                [class.roadmap-icon--prospect]="stratum.status === 'prospect'"
+              >
+                <img [src]="stratum.icon" alt="" aria-hidden="true" />
+              </span>
+              <div class="min-w-0">
+                <p class="ob-label mb-1">Stratum {{ stratum.depth }}</p>
+                <h2 class="font-display text-2xl tracking-[0.06em] text-[var(--ob-text-primary)]">
+                  {{ stratum.codename }}
+                </h2>
+                <p class="mt-2 text-[var(--ob-text-secondary)]">{{ stratum.lead }}</p>
+              </div>
+            </div>
+            <ob-badge [variant]="stratum.badge">{{ stratum.statusLabel }}</ob-badge>
+          </header>
+
+          <ul class="roadmap-items">
+            @for (item of stratum.items; track item.title) {
+              <li>
+                <p class="font-semibold text-[var(--ob-text-primary)]">{{ item.title }}</p>
+                <p class="mt-0.5 text-sm text-[var(--ob-text-muted)]">{{ item.blurb }}</p>
+              </li>
+            }
+          </ul>
+        </article>
+      </li>
+    }
+  </ol>
+
+  <footer class="mt-10 border-t border-[var(--ob-divider)] pt-4 text-sm text-[var(--ob-text-muted)]">
+    <p>
+      This sequence mirrors the living plan in
+      <span class="font-mono text-[var(--ob-text-secondary)]">docs/roadmap.md</span>.
+      Order can shuffle; depth of ambition should not.
+    </p>
+  </footer>
+</main>

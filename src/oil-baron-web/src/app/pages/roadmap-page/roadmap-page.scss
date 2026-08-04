@@ -1,0 +1,207 @@
+.roadmap-log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.roadmap-stratum {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  gap: 0.75rem 1rem;
+  padding-bottom: 1.25rem;
+
+  @media (min-width: 640px) {
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: 0.75rem 1.25rem;
+  }
+}
+
+.roadmap-spine {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.35rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 2.75rem;
+    bottom: -1.25rem;
+    left: 50%;
+    width: 2px;
+    transform: translateX(-50%);
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--ob-border-strong) 0 6px,
+      transparent 6px 12px
+    );
+    opacity: 0.7;
+  }
+}
+
+.roadmap-stratum:last-child {
+  padding-bottom: 0;
+
+  .roadmap-spine::after {
+    display: none;
+  }
+}
+
+.roadmap-depth {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--ob-text-muted);
+}
+
+.roadmap-bit {
+  margin-top: 0.45rem;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 999px;
+  border: 2px solid var(--ob-border-strong);
+  background: var(--ob-surface-paper);
+  box-shadow: 0 0 0 3px var(--ob-page-bg);
+  z-index: 1;
+}
+
+.roadmap-stratum[data-status='struck'] .roadmap-bit {
+  background: var(--ob-state-success);
+  border-color: var(--ob-state-success-border);
+}
+
+.roadmap-stratum[data-status='drilling'] .roadmap-bit {
+  background: var(--ob-action-warning);
+  border-color: var(--ob-action-warning-border);
+  animation: roadmap-pulse 1.8s ease-in-out infinite;
+}
+
+.roadmap-stratum[data-status='prospect'] .roadmap-bit {
+  background: var(--ob-surface-recessed);
+  border-color: var(--ob-state-info-border);
+}
+
+.roadmap-card {
+  border: 1px solid var(--ob-border);
+  border-radius: var(--ob-radius-md);
+  background: var(--ob-surface-paper);
+  box-shadow: var(--ob-shadow-panel);
+  overflow: hidden;
+}
+
+.roadmap-stratum[data-status='struck'] .roadmap-card {
+  background: color-mix(in srgb, var(--ob-state-success-bg) 55%, var(--ob-surface-paper));
+  border-color: var(--ob-state-success-border);
+}
+
+.roadmap-stratum[data-status='drilling'] .roadmap-card {
+  background: color-mix(in srgb, var(--ob-state-warning-bg) 45%, var(--ob-surface-paper));
+  border-color: var(--ob-state-warning-border);
+}
+
+.roadmap-stratum[data-status='prospect'] .roadmap-card {
+  background: color-mix(in srgb, var(--ob-state-info-bg) 40%, var(--ob-surface-document));
+  border-color: var(--ob-state-info-border);
+}
+
+.roadmap-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  padding: 1rem 1.15rem 0.85rem;
+  border-bottom: 1px solid var(--ob-divider);
+}
+
+.roadmap-icon {
+  display: inline-flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ob-border);
+  border-radius: var(--ob-radius-sm);
+  background: var(--ob-surface-document);
+
+  img {
+    height: 1.65rem;
+    width: 1.65rem;
+  }
+
+  &--struck {
+    border-color: var(--ob-state-success-border);
+    background: var(--ob-state-success-bg);
+  }
+
+  &--drilling {
+    border-color: var(--ob-state-warning-border);
+    background: var(--ob-state-warning-bg);
+  }
+
+  &--prospect {
+    border-color: var(--ob-state-info-border);
+    background: var(--ob-state-info-bg);
+  }
+}
+
+.roadmap-items {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem 0;
+
+  li {
+    position: relative;
+    padding: 0.7rem 1.15rem 0.7rem 2.35rem;
+    border-bottom: 1px solid var(--ob-divider);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 1.15rem;
+      top: 1.05rem;
+      width: 0.45rem;
+      height: 0.45rem;
+      border: 1px solid var(--ob-border-strong);
+      background: var(--ob-surface-control);
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.roadmap-stratum[data-status='struck'] .roadmap-items li::before {
+  background: var(--ob-state-success);
+  border-color: var(--ob-state-success-border);
+}
+
+.roadmap-stratum[data-status='drilling'] .roadmap-items li::before {
+  background: var(--ob-action-warning);
+  border-color: var(--ob-action-warning-border);
+}
+
+@keyframes roadmap-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px var(--ob-page-bg);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 3px var(--ob-page-bg),
+      0 0 0 7px color-mix(in srgb, var(--ob-action-warning) 28%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roadmap-stratum[data-status='drilling'] .roadmap-bit {
+    animation: none;
+  }
+}

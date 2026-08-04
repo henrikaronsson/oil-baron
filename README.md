@@ -65,6 +65,7 @@ dotnet test OilBaron.slnx
 | [docs/economy.md](docs/economy.md) | Economy constants |
 | [docs/architecture.md](docs/architecture.md) | Technical architecture |
 | [docs/api.md](docs/api.md) | HTTP API |
+| [docs/roadmap.md](docs/roadmap.md) | Build sequence (no dates) |
 | [docs/tailwind.md](docs/tailwind.md) | Tailwind + 1970s design system |
 | [AGENTS.md](AGENTS.md) | Conventions for coding agents |
 
